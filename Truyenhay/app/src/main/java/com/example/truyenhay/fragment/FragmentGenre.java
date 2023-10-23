@@ -25,7 +25,7 @@ import java.util.List;
 public class FragmentGenre extends Fragment implements RecycleViewAdapterGenreList.ItemListener{
     private RecyclerView recyclerView;
     RecycleViewAdapterGenreList adapter;
-    Button btlove,btread,btfree,btnofree;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,38 +45,7 @@ public class FragmentGenre extends Fragment implements RecycleViewAdapterGenreLi
         adapter.setItemListener(this);
 
         Intent intent=new Intent(getActivity(), ListBookActivity.class);
-        btlove=view.findViewById(R.id.btToplove);
-        btlove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                startActivity(intent);
-            }
-        });
-        btread=view.findViewById(R.id.btTopRead);
-        btread.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent=new Intent(getActivity(),ListBookActivity.class);
-                startActivity(intent);
-            }
-        });
-        btfree=view.findViewById(R.id.btFree);
-        btfree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent=new Intent(getActivity(),ListBookActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnofree=view.findViewById(R.id.btNotFree);
-        btnofree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent=new Intent(getActivity(),ListBookActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
     public void onItemClick(View view, int position) {

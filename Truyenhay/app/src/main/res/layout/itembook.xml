@@ -77,15 +77,15 @@
                 android:weightSum="2"
                 android:orientation="horizontal">
 
-                <ImageView
+<!--                <ImageView-->
 
-                    android:text="500k"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:src="@drawable/ic_heart"
-                    android:textColor="@color/yellow"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"/>
+<!--                    android:text="500k"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:src="@drawable/ic_heart"-->
+<!--                    android:textColor="@color/yellow"-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="35dp"/>-->
                 <TextView
                     android:id="@+id/tvlike"
                     android:gravity="center"

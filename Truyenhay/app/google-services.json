@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714145993325",
+    "project_id": "truyenhay-28004",
+    "storage_bucket": "truyenhay-28004.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714145993325:android:f431d90110dc14261f6564",
+        "android_client_info": {
+          "package_name": "com.example.truyenhay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTc_eUbd0mgc_NEGln4qCOWwyHLO8ZGJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

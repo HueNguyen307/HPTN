@@ -12,9 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.truyenhay.HistoryActivity;
-import com.example.truyenhay.ListBookActivity;
 import com.example.truyenhay.R;
-import com.example.truyenhay.Subcription;
 
 public class FragmentUser extends Fragment {
     Button bt1,bt2,bt3;
@@ -25,22 +23,7 @@ public class FragmentUser extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bt1=view.findViewById(R.id.btsub);
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), Subcription.class);
-                startActivity(intent);
-            }
-        });
-        bt2=view.findViewById(R.id.btlove);
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), ListBookActivity.class);
-                startActivity(intent);
-            }
-        });
+
         bt3=view.findViewById(R.id.bthis);
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,13 +34,5 @@ public class FragmentUser extends Fragment {
         });
     }
 
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.btsub:
-//                Intent intent=new Intent(getContext(), Subcription.class);
-//                startActivity(intent);
-//                break;
-//        }
-//    }
+
 }
