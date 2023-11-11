@@ -12,17 +12,26 @@
         android:theme="@style/Theme.TruyenHay"
         tools:targetApi="31">
         <activity
+            android:name=".AddChap"
+            android:exported="false" />
+        <activity
+            android:name=".ChapList"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ListBookActivity"
             android:exported="false" />
@@ -34,6 +43,24 @@
             android:exported="false" />
         <activity
             android:name=".ChapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GenreAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TitleAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TitleManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TitleUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GenreManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GenreUpdateActivity"
             android:exported="false" />
     </application>
 

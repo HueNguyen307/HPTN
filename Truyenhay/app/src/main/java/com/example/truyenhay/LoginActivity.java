@@ -18,11 +18,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     EditText txtE,txtP;
     Button bt,btrs,btDK;
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,24 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         btrs=findViewById(R.id.btReset);
         btDK=findViewById(R.id.btDangky);
+        db = FirebaseFirestore.getInstance();
+        CollectionReference admin = db.collection("admin");
+        admin.whereEqualTo("username","hue@gmail.com").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    if(task.getResult().getDocuments().isEmpty()){
+                        String uid = "adhsadhsad";
+                        Map<String, Object> rootAdmin = new HashMap<>();
+                        rootAdmin.put("username","hue@gmail.com");
+                        rootAdmin.put("uid", uid);
+                        admin.document(uid).set(rootAdmin);
+                    }
+                    //Toast.makeText(LoginActivity.this, task.getResult().getDocuments().get(0).get("username").toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         btDK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +86,22 @@ public class LoginActivity extends AppCompatActivity {
                         txtP.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LoginActivity.this,"Xin chào!",Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this,authResult.getUser().getEmail().toString(),Toast.LENGTH_SHORT).show();
+                        db.collection("admin").whereEqualTo("username", authResult.getUser().getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.getResult().getDocuments().isEmpty()){
+                                    // Cho nay là activity cua nguoi dung thuong
+                                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                else {
+                                    // Cho nay la activity cua admin
+                                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
                     }
                 })
                         .addOnFailureListener(new OnFailureListener() {

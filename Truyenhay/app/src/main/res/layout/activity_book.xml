@@ -16,16 +16,6 @@
         android:foregroundGravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--    <ImageButton-->
-<!--        android:id="@+id/btlove"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:layout_marginTop="163dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:background="@drawable/bt_notlove"-->
-
-<!--        app:layout_constraintLeft_toRightOf="@id/imgbook"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="40dp"/>-->
 
     <TextView
         android:id="@+id/txtbook"

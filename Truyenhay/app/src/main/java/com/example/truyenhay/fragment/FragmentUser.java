@@ -15,7 +15,7 @@ import com.example.truyenhay.HistoryActivity;
 import com.example.truyenhay.R;
 
 public class FragmentUser extends Fragment {
-    Button bt1,bt2,bt3;
+    Button bt;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user,container,false);
     }
@@ -24,8 +24,8 @@ public class FragmentUser extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bt3=view.findViewById(R.id.bthis);
-        bt3.setOnClickListener(new View.OnClickListener() {
+        bt=view.findViewById(R.id.bthis);
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), HistoryActivity.class);
