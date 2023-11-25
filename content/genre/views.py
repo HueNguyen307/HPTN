@@ -32,8 +32,7 @@ def get_genre_by_name(request):
 
 @api_view(['DELETE'])
 def delete_genre_byID(request):
-    genreid=request.data.get('genreid')
-    
+    genreid=request.GET.get('genreid')
 #try:
     obj=Genre.objects.get(id=genreid)
     #try:

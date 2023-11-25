@@ -7,7 +7,7 @@
     tools:context=".GenreManageActivity">
     <TextView
         android:id="@+id/txtLabel"
-        android:text="Quản lý thể loại sách"
+        android:text="Thêm sách theo thể loại"
         android:textSize="25dp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
@@ -25,14 +25,5 @@
         android:layout_height="wrap_content"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addgenre"
-        android:src="@drawable/baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="40dp"
-        android:layout_marginRight="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

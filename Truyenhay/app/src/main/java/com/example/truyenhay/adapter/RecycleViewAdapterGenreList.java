@@ -41,14 +41,7 @@ public class RecycleViewAdapterGenreList extends RecyclerView.Adapter<RecycleVie
 
         @Override
         public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-        //        holder.itemView.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View view) {
-        //                Context context = view.getContext();
-        //                Intent intent = new Intent(context , ChapActivity.class);
-        //                context.startActivity(intent);
-        //            }
-        //        });
+
                 Genre genre =list.get(position);
                 holder.name.setText(genre.getName());
 

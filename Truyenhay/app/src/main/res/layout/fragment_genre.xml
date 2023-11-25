@@ -12,21 +12,6 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btToplove"
-        app:layout_constraintTop_toBottomOf="@id/recycleView"
-        android:backgroundTint="@color/gray"
-        android:text="Top truyện được yêu thích"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btTopRead"
-        app:layout_constraintTop_toBottomOf="@id/btToplove"
-        android:backgroundTint="@color/gray"
-        android:text="Top truyện nhiều lượt đọc nhất"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

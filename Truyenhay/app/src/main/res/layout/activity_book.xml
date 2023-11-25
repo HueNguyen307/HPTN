@@ -35,10 +35,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
         android:text="The loai: "
+        android:textColor="@color/purple_700"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/loai"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtbook"
+        app:layout_constraintLeft_toRightOf="@+id/txtgenre"/>
     <TextView
         android:id="@+id/txtauthor"
         app:layout_constraintTop_toBottomOf="@id/txtgenre"
@@ -47,9 +58,20 @@
         android:layout_marginLeft="10dp"
         android:text="Tac gia: "
         android:textStyle="bold"
+        android:textColor="@color/purple_700"
         android:textSize="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tg"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtgenre"
+        app:layout_constraintLeft_toRightOf="@+id/txtauthor"/>
     <TextView
         android:id="@+id/txtdescrip"
         app:layout_constraintTop_toBottomOf="@id/txtauthor"
@@ -57,20 +79,32 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
         android:text="Mo ta: "
-        android:lines="5"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/mota"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/txtdescrip"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:lines="2"/>
     <TextView
         android:id="@+id/txtchaps"
         app:layout_constraintTop_toBottomOf="@id/txtdescrip"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
         android:text="Cac chuong: "
         android:textStyle="bold"
         android:textSize="20dp"
+        android:textColor="@color/purple_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
@@ -80,16 +114,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/idbt"
-        app:layout_constraintTop_toBottomOf="@id/recycleChap"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Truyện tương tự"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

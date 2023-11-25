@@ -20,6 +20,8 @@ def get_Title(request):
         titles=Title.objects.get(id=titleid)
         serializer=TitleSerializer(titles, many=False)
         res = serializer.data
+        genre = Genre.objects.filter(id = res.get('genreId'))
+        res['genre'] = genre.values()[0]['name']
 
         return Response(res)
     # except:
@@ -62,9 +64,9 @@ def filter_title(request):
             list.append({"id":title.id,
                         "name":title.name,
                         "author":title.author,
+                        "genreId":title.genreId.id,
                         "description":title.description,
                         })
-            
         return Response(list, status=status.HTTP_200_OK) 
  
 
@@ -122,12 +124,13 @@ def add_Title(request):
 
 @api_view(['PUT'])
 def update_title(request):
+    print(request.data)
     # sửa đầu truyện
 
     name=request.data.get('name')
     author=request.data.get('author')
     description=request.data.get('description')
-    genreid=request.data.get('genreid')
+    genreid=request.data.get('genreId_id')
     titleid=request.data.get("titleid")
   
     if not ( titleid and name  and description and author and genreid):
@@ -152,6 +155,8 @@ def update_title(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+    else:
+        print(serializer.errors)
         
     # except:
     #     return Response({"error":"Sách không tồn tại"},status=status.HTTP_400_BAD_REQUEST)
@@ -163,8 +168,13 @@ def search_title_by_name_or_author(request):
     name_search=request.GET.get('name')
     author_search=request.GET.get('author')
 
-    if name_search==None or author_search==None:
-        return Response({'error':'hãy điền đầy đủ thông tin'},status=status.HTTP_400_BAD_REQUEST)
+    # if name_search==None or author_search==None:
+    #     return Response({'error':'hãy điền đầy đủ thông tin'},status=status.HTTP_400_BAD_REQUEST)
+
+    if name_search==None:
+        name_search = ""
+    if author_search==None:
+        author_search = ""
 
     # try:   
         #tim kiem
@@ -175,12 +185,14 @@ def search_title_by_name_or_author(request):
     response_data=[]
     for i in range(len(list_search_title)):
         object = {}
+        print(list_search_title[i])
         object['id']=list_search_title[i]['id']
+        object['genreId']=list_search_title[i]['genreId_id']
         object['name']=list_search_title[i]['name']
         object['author']=list_search_title[i]['author']
         object['description']=list_search_title[i]['description']
         response_data.append(object)
-
+        
     return Response(response_data,status=status.HTTP_200_OK)
     # except Exception as e:
     #     print(e)

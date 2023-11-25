@@ -10,79 +10,72 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.truyenhay.adapter.TitleRecycleViewAdapter;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.truyenhay.adapter.RecycleViewAdapter;
 import com.example.truyenhay.model.Book;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class TitleManageActivity extends AppCompatActivity implements TitleRecycleViewAdapter.ItemListener{
+public class TitleManageActivity extends AppCompatActivity implements RecycleViewAdapter.ItemListener, SearchView.OnQueryTextListener {
 
-    RecyclerView recycleView;
-    TitleRecycleViewAdapter adapter;
-    TextView tt;
+    private RecyclerView recycleView;
+    RecycleViewAdapter adapter;
+    private SearchView searchView;
     FloatingActionButton fab;
-    Button btnSearch;
-    Spinner spinner;
-    String id;
-    boolean exist;
-    String genreselected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_manage);
-        intiview();
+        recycleView =findViewById(R.id.recycleView);
+        searchView=findViewById(R.id.searchView);
+        fab=findViewById(R.id.addtitle);
+        adapter = new RecycleViewAdapter();
+        List<Book> list = new ArrayList<>();
+        Book b = new Book();
+        list.add(b);
+        adapter.setList(list);
+        LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recycleView.setLayoutManager(manager);
+        recycleView.setAdapter(adapter);
+        adapter.setItemListener(this);
+        searchView.setOnQueryTextListener(this);
+        searchView.setQuery("",true);
+        adapter.notifyDataSetChanged();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TitleManageActivity.this, "Add title thanh cong", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(), TitleAddActivity.class);
-//                intent.putExtra("genreid", id);
+                Intent intent=new Intent(getApplicationContext(), AddTitleByGenre.class);
+
                 startActivity(intent);
             }
         });
-        List<Book
-                > mList=new ArrayList<>();
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
-
     }
 
     private void intiview() {
-        recycleView=findViewById(R.id.title_recycleView);
-        fab=findViewById(R.id.addtitle);
-        spinner=findViewById(R.id.spinner);
-        btnSearch=findViewById(R.id.btnSearchtitleByGenre);
-        tt=findViewById(R.id.txtTonTai);
-        adapter=new TitleRecycleViewAdapter();
-        exist=false;
 
-        // danh sach the loai
-        String[] listSchool = new String[0];
-        ArrayAdapter<String> adapterSchool=new ArrayAdapter<>(this, R.layout.item_spinner,listSchool);
-        spinner.setAdapter(adapterSchool);
-
-        List<Book> k=new ArrayList<>();
-        adapter.setList(k);
-        adapter.setItemListener(this);
-        LinearLayoutManager manager=new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recycleView.setLayoutManager(manager);
-        recycleView.setAdapter(adapter);
     }
 
 
     @Override
     public void onItemClick(View view, int position) {
-        Book title=adapter.getTitle(position);
+        Book title=adapter.getItem(position);
         Intent intent=new Intent(getApplicationContext(), TitleUpdateActivity.class);
         intent.putExtra("item", title);
         startActivity(intent);
@@ -92,5 +85,65 @@ public class TitleManageActivity extends AppCompatActivity implements TitleRecyc
     protected void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.setList(new ArrayList<>());
+
+        String url =  "http://192.168.1.14:8000/api/search_title_by_name/";
+        System.out.println(url);
+        String search = String.valueOf(searchView.getQuery());
+        Map<String, String> body = new HashMap<>();
+        url +="?name=" + search + "&author=" + search;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            List<Book> list = new ArrayList<>();
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Book book = new Book(jsonObject.getString("id"),
+                                        jsonObject.getString("genreId"),
+                                        jsonObject.getString("name"),
+                                        jsonObject.getString("author"),
+                                        jsonObject.getString("description")
+
+                                );
+                                list.add(book);
+
+                                adapter.setList(list);
+                                adapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            System.err.println(e);
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+
+                    }
+
+                    protected Map<String, String> getParams() {
+                        return body;
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+        adapter.notifyDataSetChanged();
+        return false;
     }
 }

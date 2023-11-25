@@ -41,14 +41,7 @@ public class RecycleViewAdapterChapList extends RecyclerView.Adapter<RecycleView
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Context context = view.getContext();
-//                Intent intent = new Intent(context , ChapActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
+
         Chap chap =list.get(position);
         holder.name.setText(chap.getName());
 

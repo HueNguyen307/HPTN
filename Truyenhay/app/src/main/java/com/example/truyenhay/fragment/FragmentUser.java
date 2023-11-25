@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.truyenhay.HistoryActivity;
 import com.example.truyenhay.R;
 
 public class FragmentUser extends Fragment {
@@ -28,8 +27,7 @@ public class FragmentUser extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), HistoryActivity.class);
-                startActivity(intent);
+
             }
         });
     }

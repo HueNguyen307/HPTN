@@ -24,6 +24,7 @@ def get_chapter_info(request):
             return Response({'error':'Hãy điền đầy đủ các trường'},status=status.HTTP_400_BAD_REQUEST)
         else:
             chapterid=int(chapterid)
+            print(chapterid)
 
         try:
             chapter_=Chapter.objects.filter(id=chapterid)[0]
@@ -36,7 +37,7 @@ def get_chapter_info(request):
             response_data['content']=chapter_.content
             response_data['created_at']=chapter_.created_at
             response_data['updated_at']=chapter_.updated_at
-            
+            print(chapter_.content)
             return Response(response_data,status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
@@ -46,10 +47,11 @@ def get_chapter_info(request):
 
 
 @csrf_exempt
+@api_view(['POST'])
 def add_chapter(request):
     resp={}
     if request.method == 'POST':    
-        request_data = json.loads(request.body)
+        request_data = request.data
 
         number = request_data.get('number')
         name = request_data.get('name')
@@ -104,7 +106,7 @@ def add_chapter(request):
         resp['status_code'] = '400'
         resp['error'] =  'Request method is not POST'
 
-    return HttpResponse(json.dumps(resp,default=str), content_type = 'application/json')   
+    return Response(resp, status=status.HTTP_200_OK)   
    
 @csrf_exempt
 def update_chapter(request):
@@ -182,6 +184,7 @@ def chapterList(request):
             chapter['id'] = i.id 
             chapter['name'] = i.name
             chapter['number'] = i.number
+            
             chapter['content'] = i.content
             list.append(chapter)
         return(Response(list))

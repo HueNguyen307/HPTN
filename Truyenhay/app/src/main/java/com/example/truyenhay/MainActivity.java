@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tabLayout=findViewById(R.id.tab_layout);
-//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_person);
         viewPager=findViewById(R.id.view_pager);
         ViewPagerAdapter adapter=new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);

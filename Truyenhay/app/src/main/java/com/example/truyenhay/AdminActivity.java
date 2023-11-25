@@ -15,14 +15,12 @@ public class AdminActivity extends AppCompatActivity {
 
 
     Button genre, title;
-    private BottomNavigationView navigationView;
-    private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-//        initViewPager();
         genre=findViewById(R.id.genreManager);
         title=findViewById(R.id.titleManager);
         genre.setOnClickListener(new View.OnClickListener() {
